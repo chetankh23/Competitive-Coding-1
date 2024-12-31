@@ -16,17 +16,18 @@ class Problem1 {
 
     int low = 0;
     int high = nums.length - 1;
-    while (low <= high) {
+    while (high - low >= 2) {
       int mid = low + (high - low) / 2;
-      if (nums[mid] != mid + 1 && nums[mid - 1] == mid) {
-        return mid + 1;
+      int midIndxDifference = nums[mid] - mid;
+      int lowIndxDifference = nums[low] - low;
+      int highIndxDifference = nums[high] - high;
+      if (midIndxDifference != lowIndxDifference) {
+        high = mid;
+      } else if (highIndxDifference != midIndxDifference) {
+        low = mid;
       }
-      if ((nums[mid] - mid) != (nums[low] - low)) {
-        high = mid - 1;
-      } else {
-        low = mid + 1;
-      }
+
     }
-    return -1;
+    return (nums[low] + nums[high]) / 2;
   }
 }
